@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PTP Framework — People • Technology • Process</title>
+  <meta name="description" content="PTP is a change-and-adoption operating model that starts with People, makes Technology concrete early, and then locks in Process to scale safely." />
+  <style>
+    /* ── Reset & tokens ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --people:  #4F46E5; /* indigo */
+      --tech:    #0EA5E9; /* sky    */
+      --process: #10B981; /* emerald*/
+      --dark:    #0F172A;
+      --mid:     #1E293B;
+      --muted:   #64748B;
+      --light:   #F8FAFC;
+      --white:   #FFFFFF;
+      --radius:  12px;
+      --shadow:  0 4px 24px rgba(0,0,0,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,23,42,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .75rem 2rem;
+    }
+    .nav-brand {
+      font-size: 1.25rem; font-weight: 800; letter-spacing: -.5px;
+      background: linear-gradient(135deg, var(--people), var(--tech), var(--process));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: #94A3B8; text-decoration: none; font-size: .875rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,70,229,.25) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 90% 80%,  rgba(16,185,129,.12) 0%, transparent 60%),
+        var(--dark);
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--tech);
+      border: 1px solid rgba(14,165,233,.3);
+      border-radius: 999px;
+      padding: .35rem 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -.03em;
+      line-height: 1.08;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 .p { color: var(--people); }
+    .hero h1 .t { color: var(--tech); }
+    .hero h1 .r { color: var(--process); }
+    .hero h1 .dot { color: #475569; }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: #94A3B8;
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+    .hero-sub {
+      font-size: 1rem; color: #64748B;
+      max-width: 520px; margin: 0 auto 2.5rem;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block;
+      padding: .75rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 700; font-size: .95rem;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--people), var(--tech));
+      color: var(--white);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.15);
+      color: #CBD5E1;
+      background: rgba(255,255,255,.04);
+    }
+
+    /* ── Arrow diagram ────────────────────────────────────── */
+    .diagram {
+      display: flex; align-items: stretch;
+      gap: 0; margin: 3.5rem auto 0;
+      max-width: 760px; width: 100%;
+    }
+    .d-block {
+      flex: 1;
+      padding: 1.5rem 1.25rem 1.25rem;
+      border-radius: var(--radius);
+      position: relative;
+      text-align: center;
+    }
+    .d-block.people  { background: rgba(79,70,229,.15);  border: 1px solid rgba(79,70,229,.35); }
+    .d-block.tech    { background: rgba(14,165,233,.15); border: 1px solid rgba(14,165,233,.35); }
+    .d-block.process { background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.35); }
+    .d-arrow {
+      display: flex; align-items: center;
+      padding: 0 .5rem; color: #475569; font-size: 1.5rem;
+    }
+    .d-num {
+      display: inline-block;
+      width: 2rem; height: 2rem; line-height: 2rem;
+      border-radius: 50%; font-weight: 800; font-size: .8rem;
+      margin-bottom: .5rem;
+    }
+    .people  .d-num { background: var(--people);  color: #fff; }
+    .tech    .d-num { background: var(--tech);    color: #fff; }
+    .process .d-num { background: var(--process); color: #fff; }
+    .d-label { font-weight: 800; font-size: 1rem; display: block; margin-bottom: .4rem; }
+    .people  .d-label { color: #A5B4FC; }
+    .tech    .d-label { color: #7DD3FC; }
+    .process .d-label { color: #6EE7B7; }
+    .d-sub { font-size: .75rem; color: #64748B; }
+    .d-loop {
+      text-align: center; color: #475569; font-size: .8rem;
+      margin-top: .75rem; display: flex; align-items: center;
+      justify-content: center; gap: .4rem;
+    }
+    .d-loop svg { flex-shrink: 0; }
+
+    /* ── Sections ─────────────────────────────────────────── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800; letter-spacing: -.02em;
+      line-height: 1.15; margin-bottom: .75rem;
+    }
+    .section-desc {
+      color: #94A3B8; max-width: 580px; font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Phase cards ──────────────────────────────────────── */
+    .phases { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .phases { grid-template-columns: repeat(3,1fr); } }
+
+    .phase-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .phase-header {
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .phase-header.people  { background: rgba(79,70,229,.2);  border-bottom: 1px solid rgba(79,70,229,.3); }
+    .phase-header.tech    { background: rgba(14,165,233,.2); border-bottom: 1px solid rgba(14,165,233,.3); }
+    .phase-header.process { background: rgba(16,185,129,.2); border-bottom: 1px solid rgba(16,185,129,.3); }
+    .phase-icon { font-size: 1.5rem; }
+    .phase-title-wrap { flex: 1; }
+    .phase-num { font-size: .7rem; font-weight: 600; color: #64748B; }
+    .phase-name { font-size: 1rem; font-weight: 800; }
+    .people  .phase-name { color: #A5B4FC; }
+    .tech    .phase-name { color: #7DD3FC; }
+    .process .phase-name { color: #6EE7B7; }
+
+    .phase-body {
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,.06);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .move {
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding: .65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .move:last-child { border-bottom: none; }
+    .move-num {
+      flex-shrink: 0;
+      width: 1.5rem; height: 1.5rem; line-height: 1.5rem;
+      border-radius: 50%; text-align: center;
+      font-size: .7rem; font-weight: 800;
+    }
+    .people  .move-num { background: rgba(79,70,229,.25);  color: #A5B4FC; }
+    .tech    .move-num { background: rgba(14,165,233,.25); color: #7DD3FC; }
+    .process .move-num { background: rgba(16,185,129,.25); color: #6EE7B7; }
+    .move-text { flex: 1; }
+    .move-title { font-size: .875rem; font-weight: 700; color: #E2E8F0; }
+    .move-desc  { font-size: .8rem;   color: #64748B; margin-top: .15rem; }
+
+    /* ── Why PTP ──────────────────────────────────────────── */
+    .why-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 900px) { .why-grid { grid-template-columns: repeat(4,1fr); } }
+
+    .why-card {
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .why-icon { font-size: 1.75rem; margin-bottom: .75rem; }
+    .why-title { font-size: 1rem; font-weight: 700; color: #E2E8F0; margin-bottom: .4rem; }
+    .why-desc  { font-size: .825rem; color: #64748B; }
+
+    /* ── Pitch ────────────────────────────────────────────── */
+    .pitch-section { background: var(--mid); }
+    .pitch-blocks { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .pitch-blocks { grid-template-columns: repeat(2,1fr); } }
+
+    .pitch-block {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .pitch-label {
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; margin-bottom: .5rem;
+    }
+    .problem .pitch-label  { color: #F87171; }
+    .insight .pitch-label  { color: #FBBF24; }
+    .solution .pitch-label { color: var(--tech); }
+    .value .pitch-label    { color: var(--process); }
+    .pitch-text { color: #CBD5E1; font-size: .9rem; line-height: 1.6; }
+
+    /* ── Trademark guidance ───────────────────────────────── */
+    .marks-grid { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .marks-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 900px) { .marks-grid { grid-template-columns: repeat(3,1fr); } }
+
+    .mark-card {
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .mark-name {
+      font-size: 1.1rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--people), var(--tech));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .mark-desc { font-size: .8rem; color: #64748B; }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    .cta {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,70,229,.2) 0%, transparent 70%),
+        var(--dark);
+    }
+    .cta .section-title { margin: 0 auto .75rem; }
+    .cta .section-desc  { margin: 0 auto 2.5rem; }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      text-align: center; padding: 2rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: #334155; font-size: .8rem;
+    }
+    footer a { color: #475569; text-decoration: none; }
+    footer a:hover { color: #94A3B8; }
+
+    /* ── Responsive nav ───────────────────────────────────── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .diagram { flex-direction: column; }
+      .d-arrow { transform: rotate(90deg); padding: .25rem 0; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-brand">PTP™</div>
+    <ul class="nav-links">
+      <li><a href="#model">Model</a></li>
+      <li><a href="#phases">Phases</a></li>
+      <li><a href="#why">Why PTP</a></li>
+      <li><a href="#pitch">Pitch</a></li>
+      <li><a href="#brand">Brand</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">AI Adoption &amp; Change Framework</div>
+    <h1>
+      <span class="p">People</span><span class="dot"> • </span><span class="t">Technology</span><span class="dot"> • </span><span class="r">Process</span>
+    </h1>
+    <p class="hero-tagline">People first. Tech next. Process to scale.</p>
+    <p class="hero-sub">
+      A change-and-adoption operating model that starts with People, makes Technology concrete early,
+      and then locks in Process to scale safely.
+    </p>
+    <div class="btn-group">
+      <a href="#phases" class="btn btn-primary">Explore the Framework</a>
+      <a href="#pitch" class="btn btn-outline">See the Pitch</a>
+    </div>
+
+    <!-- Simplified arrow diagram -->
+    <div class="diagram">
+      <div class="d-block people">
+        <div class="d-num">1</div>
+        <span class="d-label">People</span>
+        <div class="d-sub">Why &amp; Who<br/>Align outcomes, roles, trust</div>
+      </div>
+      <div class="d-arrow">→</div>
+      <div class="d-block tech">
+        <div class="d-num">2</div>
+        <span class="d-label">Technology</span>
+        <div class="d-sub">What &amp; How<br/>Tools, data, guardrails</div>
+      </div>
+      <div class="d-arrow">→</div>
+      <div class="d-block process">
+        <div class="d-num">3</div>
+        <span class="d-label">Process</span>
+        <div class="d-sub">Run &amp; Improve<br/>Standardize, govern, measure</div>
+      </div>
+    </div>
+    <div class="d-loop">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8 Q2 2 8 2 Q14 2 14 8 Q14 14 8 14" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M5 12 L8 14 L8 10" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Learn &amp; improve — Process feeds back into People
+    </div>
+  </section>
+
+  <!-- Model -->
+  <section id="model">
+    <div class="container">
+      <div class="section-label">The Core Insight</div>
+      <h2 class="section-title">Why Technology comes <em>second</em>&nbsp;— not last</h2>
+      <p class="section-desc">
+        Most AI transformations either obsess over people &amp; process and never ship usable tech,
+        or they buy tech and hope adoption happens. PTP fixes both failure modes.
+      </p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🎯</div>
+          <div class="why-title">People as prime mover</div>
+          <div class="why-desc">Outcomes, roles, and trust are defined first. Change only sticks when humans own it.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <div class="why-title">Tech made tangible fast</div>
+          <div class="why-desc">Prototypes and demos beat documents. Users see the new workflow in days — not months.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡️</div>
+          <div class="why-title">Trust by design</div>
+          <div class="why-desc">Data boundaries, human-in-the-loop controls, and auditability are built in — not bolted on.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">♻️</div>
+          <div class="why-title">Process as stabilizer</div>
+          <div class="why-desc">Governance and measurement lock in gains so the organization can scale safely and continuously improve.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phases (9 moves) -->
+  <section id="phases" style="background: rgba(255,255,255,.015);">
+    <div class="container">
+      <div class="section-label">The Playbook</div>
+      <h2 class="section-title">3 Phases · 9 Moves</h2>
+      <p class="section-desc">
+        A practical playbook deep enough to include governance and trust,
+        without becoming academic.
+      </p>
+      <div class="phases">
+
+        <!-- Phase 1: People -->
+        <div class="phase-card">
+          <div class="phase-header people">
+            <div class="phase-icon">🧑‍🤝‍🧑</div>
+            <div class="phase-title-wrap">
+              <div class="phase-num">Phase 1</div>
+              <div class="phase-name people">People — Align</div>
+            </div>
+          </div>
+          <div class="phase-body people">
+            <div class="move">
+              <div class="move-num people">1</div>
+              <div class="move-text">
+                <div class="move-title">Outcome clarity</div>
+                <div class="move-desc">Define 2–3 measurable outcomes: time saved, quality uplift, risk reduction.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num people">2</div>
+              <div class="move-text">
+                <div class="move-title">Persona + moments that matter</div>
+                <div class="move-desc">Map where work is painful and where high-value decisions happen.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num people">3</div>
+              <div class="move-text">
+                <div class="move-title">Adoption contract</div>
+                <div class="move-desc">What leaders, champions, and users commit to — time, behavior, and feedback loops.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2: Technology -->
+        <div class="phase-card">
+          <div class="phase-header tech">
+            <div class="phase-icon">⚙️</div>
+            <div class="phase-title-wrap">
+              <div class="phase-num">Phase 2</div>
+              <div class="phase-name tech">Technology — Make it Real</div>
+            </div>
+          </div>
+          <div class="phase-body tech">
+            <div class="move">
+              <div class="move-num tech">4</div>
+              <div class="move-text">
+                <div class="move-title">Use-case to workflow mapping</div>
+                <div class="move-desc">Identify exactly where AI fits in the flow of work — not beside it.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num tech">5</div>
+              <div class="move-text">
+                <div class="move-title">Prototype fast</div>
+                <div class="move-desc">Demos beat docs. Show the "new way" in days or weeks, not quarters.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num tech">6</div>
+              <div class="move-text">
+                <div class="move-title">Trust by design</div>
+                <div class="move-desc">Data boundaries, transparency, human-in-the-loop, and auditability from day one.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3: Process -->
+        <div class="phase-card">
+          <div class="phase-header process">
+            <div class="phase-icon">📋</div>
+            <div class="phase-title-wrap">
+              <div class="phase-num">Phase 3</div>
+              <div class="phase-name process">Process — Scale</div>
+            </div>
+          </div>
+          <div class="phase-body process">
+            <div class="move">
+              <div class="move-num process">7</div>
+              <div class="move-text">
+                <div class="move-title">Standardize</div>
+                <div class="move-desc">"How we do it here" — checklists, runbooks, and templates your team actually uses.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num process">8</div>
+              <div class="move-text">
+                <div class="move-title">Govern + guardrails</div>
+                <div class="move-desc">Approvals, monitoring, model/tool lifecycle management, and risk controls.</div>
+              </div>
+            </div>
+            <div class="move">
+              <div class="move-num process">9</div>
+              <div class="move-text">
+                <div class="move-title">Measure + iterate</div>
+                <div class="move-desc">Adoption metrics + outcome metrics + continuous-improvement cadence.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why PTP vs PPT -->
+  <section id="why">
+    <div class="container">
+      <div class="section-label">The Difference</div>
+      <h2 class="section-title">PTP vs. the status quo</h2>
+      <p class="section-desc">
+        Traditional change frameworks were designed for slower technology cycles.
+        The AI wave demands a new ordering.
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:.875rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">Dimension</th>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">Traditional PPT / Change Models</th>
+              <th style="text-align:left; padding:.75rem 1rem; color:#7DD3FC; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">PTP Framework</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">Technology timing</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Tech comes last (after change is "ready")</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Tech made concrete in Phase 2 — users see it early</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">AI adoption stance</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Abstract promises; "we'll figure out tools later"</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Demos &amp; prototypes replace slides and theory</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">Trust &amp; governance</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Bolted on at the end (or forgotten)</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Built in from day one (Move 6)</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">Feedback loop</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Linear — people → process → maybe revisit</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Explicit loop: Process feeds back into People</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#94A3B8;">Scale path</td>
+              <td style="padding:.75rem 1rem; color:#64748B;">Process is assumed; rarely explicit</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0;">Process phase has dedicated governance + measurement moves</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pitch narrative -->
+  <section id="pitch" class="pitch-section">
+    <div class="container">
+      <div class="section-label">The 60-Second Pitch</div>
+      <h2 class="section-title">From problem to proof</h2>
+      <p class="section-desc">Use this narrative when presenting PTP to stakeholders, executives, or investors.</p>
+      <div class="pitch-blocks">
+        <div class="pitch-block problem">
+          <div class="pitch-label">🔴 Problem</div>
+          <div class="pitch-text">
+            Most AI transformations either obsess over people &amp; process and never ship usable tech —
+            or they buy tech and hope adoption happens. Both paths fail, and they fail expensively.
+          </div>
+        </div>
+        <div class="pitch-block insight">
+          <div class="pitch-label">💡 Insight</div>
+          <div class="pitch-text">
+            In the AI era, people need to <em>experience</em> the new workflow early to believe in it —
+            and to guide it. Abstract promises don't drive behavior change. Tangible tools do.
+          </div>
+        </div>
+        <div class="pitch-block solution">
+          <div class="pitch-label">✅ Solution</div>
+          <div class="pitch-text">
+            <strong>PTP: People → Technology → Process.</strong><br/>
+            Align humans first. Make the technology tangible fast.
+            Then systematize with process so it scales safely — and keeps improving.
+          </div>
+        </div>
+        <div class="pitch-block value">
+          <div class="pitch-label">📈 Value</div>
+          <div class="pitch-text">
+            Faster time-to-value. Higher adoption rates. Lower risk —
+            because trust and governance are built in from the start,
+            not added as an afterthought.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand / Trademark -->
+  <section id="brand">
+    <div class="container">
+      <div class="section-label">Brand &amp; Trademark</div>
+      <h2 class="section-title">Distinctive brand marks</h2>
+      <p class="section-desc">
+        "People Technology Process" as a phrase is likely descriptive and difficult to trademark alone.
+        Build the brand around a <strong>distinctive coined name</strong> paired with the PTP expansion.
+      </p>
+      <div class="marks-grid">
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP Loop™</div>
+            <div class="mark-desc">Emphasizes the continuous improvement cycle</div>
+          </div>
+        </div>
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP Catalyst™</div>
+            <div class="mark-desc">Positions it as an accelerator for AI adoption</div>
+          </div>
+        </div>
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP OS™</div>
+            <div class="mark-desc">Operating System — a living organizational layer</div>
+          </div>
+        </div>
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP Flywheel™</div>
+            <div class="mark-desc">Compounding momentum with each iteration</div>
+          </div>
+        </div>
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP Shift™</div>
+            <div class="mark-desc">The paradigm shift in change management</div>
+          </div>
+        </div>
+        <div class="mark-card">
+          <div>
+            <div class="mark-name">PTP Method™</div>
+            <div class="mark-desc">Simple, consultancy-friendly positioning</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem; font-size:.825rem; color:#475569;">
+        ™ usage indicates intent to claim rights. File with your national trademark office (USPTO, IPO, etc.) for registered protection. Pair any mark with a unique logo and consistent stylization to strengthen distinctiveness.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <div class="section-label">Get Started</div>
+      <h2 class="section-title" style="max-width:560px;">Ready to adopt AI the PTP way?</h2>
+      <p class="section-desc">
+        Start with People. Make Technology real. Scale with Process.
+        <br/>Faster time-to-value. Higher adoption. Lower risk.
+      </p>
+      <div class="btn-group" style="justify-content:center;">
+        <a href="#phases" class="btn btn-primary">Start with the 9 Moves</a>
+        <a href="https://github.com/santoshkanthety/PTP" class="btn btn-outline" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <strong>PTP™ Framework</strong> — People • Technology • Process<br/>
+      A modern change &amp; AI adoption operating model.<br/>
+      <a href="https://github.com/santoshkanthety/PTP" target="_blank" rel="noopener">github.com/santoshkanthety/PTP</a>
+    </p>
+  </footer>
+
+</body>
+</html>
