@@ -219,8 +219,8 @@
   <!-- Slide navigation -->
   <div class="slide-counter" id="slideCounter">Slide 1 of 5</div>
   <div class="nav-controls">
-    <a class="nav-btn" onclick="prevSlide()" title="Previous slide">↑</a>
-    <a class="nav-btn" onclick="nextSlide()" title="Next slide">↓</a>
+    <button class="nav-btn" onclick="prevSlide()" title="Previous slide" aria-label="Previous slide">↑</button>
+    <button class="nav-btn" onclick="nextSlide()" title="Next slide" aria-label="Next slide">↓</button>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
@@ -463,7 +463,7 @@
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault();
         nextSlide();
       } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
