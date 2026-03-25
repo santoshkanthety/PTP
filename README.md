@@ -32,6 +32,7 @@ People → Technology → Process
 
 ```
 index.html                  # Single-page website (no build step required)
+presentation.html           # Brand & trademark slide deck (confidential, not linked from site)
 .github/workflows/
   deploy.yml                # GitHub Pages deployment workflow
 README.md
