@@ -261,24 +261,37 @@
     .value .pitch-label    { color: var(--process); }
     .pitch-text { color: #CBD5E1; font-size: .9rem; line-height: 1.6; }
 
-    /* ── Trademark guidance ───────────────────────────────── */
-    .marks-grid { display: grid; gap: 1rem; }
-    @media (min-width: 640px) { .marks-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (min-width: 900px) { .marks-grid { grid-template-columns: repeat(3,1fr); } }
+    /* ── KPIs & Metrics ──────────────────────────────────── */
+    .metrics-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .metrics-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 900px) { .metrics-grid { grid-template-columns: repeat(3,1fr); } }
 
-    .mark-card {
+    .metric-card {
       background: var(--mid);
       border: 1px solid rgba(255,255,255,.07);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      display: flex; align-items: center; gap: 1rem;
+      padding: 1.5rem;
+      text-align: center;
     }
-    .mark-name {
-      font-size: 1.1rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--people), var(--tech));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .metric-value {
+      font-size: 2.25rem; font-weight: 900;
+      line-height: 1.1; margin-bottom: .35rem;
     }
-    .mark-desc { font-size: .8rem; color: #64748B; }
+    .metric-value.people-clr  { color: #A5B4FC; }
+    .metric-value.tech-clr    { color: #7DD3FC; }
+    .metric-value.process-clr { color: #6EE7B7; }
+    .metric-value.warn-clr    { color: #FBBF24; }
+    .metric-value.danger-clr  { color: #F87171; }
+    .metric-label {
+      font-size: .875rem; font-weight: 700; color: #E2E8F0;
+      margin-bottom: .25rem;
+    }
+    .metric-source {
+      font-size: .7rem; color: #475569; font-style: italic;
+    }
+    .metric-desc {
+      font-size: .8rem; color: #64748B; margin-top: .35rem;
+    }
 
     /* ── CTA ──────────────────────────────────────────────── */
     .cta {
@@ -317,7 +330,7 @@
       <li><a href="#phases">Phases</a></li>
       <li><a href="#why">Why PTP</a></li>
       <li><a href="#pitch">Pitch</a></li>
-      <li><a href="#brand">Brand</a></li>
+      <li><a href="#metrics">Metrics</a></li>
     </ul>
   </nav>
 
@@ -602,62 +615,118 @@
             Faster time-to-value. Higher adoption rates. Lower risk —
             because trust and governance are built in from the start,
             not added as an afterthought.
+            <br/><br/>
+            <strong style="color:#7DD3FC;">The data backs it up:</strong>
+            Organizations that prototype early see 3.5× higher ROI (BCG),
+            while excellent change management makes projects 6× more likely to succeed (Prosci).
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Brand / Trademark -->
-  <section id="brand">
+  <!-- KPIs & Metrics -->
+  <section id="metrics">
     <div class="container">
-      <div class="section-label">Brand &amp; Trademark</div>
-      <h2 class="section-title">Distinctive brand marks</h2>
+      <div class="section-label">Market Intelligence</div>
+      <h2 class="section-title">The numbers behind the need for PTP</h2>
       <p class="section-desc">
-        "People Technology Process" as a phrase is likely descriptive and difficult to trademark alone.
-        Build the brand around a <strong>distinctive coined name</strong> paired with the PTP expansion.
+        Industry research consistently shows that people-centric, technology-forward approaches outperform traditional change models — especially in AI adoption.
       </p>
-      <div class="marks-grid">
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP Loop™</div>
-            <div class="mark-desc">Emphasizes the continuous improvement cycle</div>
-          </div>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value danger-clr">70%</div>
+          <div class="metric-label">Digital transformations fail</div>
+          <div class="metric-desc">Most failures trace back to people &amp; adoption gaps, not technology limitations.</div>
+          <div class="metric-source">McKinsey &amp; Company, 2023</div>
         </div>
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP Catalyst™</div>
-            <div class="mark-desc">Positions it as an accelerator for AI adoption</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value warn-clr">$4.6T</div>
+          <div class="metric-label">Global AI market by 2032</div>
+          <div class="metric-desc">The AI market is projected to grow at a 36.6% CAGR, making adoption frameworks essential.</div>
+          <div class="metric-source">Fortune Business Insights, 2024</div>
         </div>
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP OS™</div>
-            <div class="mark-desc">Operating System — a living organizational layer</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value tech-clr">3.5×</div>
+          <div class="metric-label">Higher ROI with early prototyping</div>
+          <div class="metric-desc">Organizations that prototype AI solutions early see 3.5× higher returns than those that delay.</div>
+          <div class="metric-source">Boston Consulting Group, 2024</div>
         </div>
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP Flywheel™</div>
-            <div class="mark-desc">Compounding momentum with each iteration</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value people-clr">6×</div>
+          <div class="metric-label">Success with change management</div>
+          <div class="metric-desc">Projects with excellent change management are 6× more likely to meet objectives.</div>
+          <div class="metric-source">Prosci, 2023</div>
         </div>
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP Shift™</div>
-            <div class="mark-desc">The paradigm shift in change management</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value process-clr">72%</div>
+          <div class="metric-label">CEOs prioritize AI</div>
+          <div class="metric-desc">CEOs cite generative AI as a top investment priority, but only 25% feel ready to scale it.</div>
+          <div class="metric-source">Gartner CEO Survey, 2024</div>
         </div>
-        <div class="mark-card">
-          <div>
-            <div class="mark-name">PTP Method™</div>
-            <div class="mark-desc">Simple, consultancy-friendly positioning</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value warn-clr">$2.6T</div>
+          <div class="metric-label">Productivity gains from Gen AI</div>
+          <div class="metric-desc">Generative AI could add $2.6–4.4 trillion annually across industries globally.</div>
+          <div class="metric-source">McKinsey Global Institute, 2023</div>
         </div>
       </div>
-      <p style="margin-top:1.5rem; font-size:.825rem; color:#475569;">
-        ™ usage indicates intent to claim rights. File with your national trademark office (USPTO, IPO, etc.) for registered protection. Pair any mark with a unique logo and consistent stylization to strengthen distinctiveness.
+
+      <!-- PTP-specific KPIs -->
+      <h3 style="margin-top:3rem; font-size:1.25rem; font-weight:800; color:#E2E8F0; margin-bottom:.5rem;">PTP Framework KPIs</h3>
+      <p style="color:#94A3B8; font-size:.9rem; margin-bottom:1.5rem; max-width:580px;">
+        Track these metrics across each PTP phase to measure adoption health and business impact.
       </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:.875rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">Phase</th>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">KPI</th>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">Target</th>
+              <th style="text-align:left; padding:.75rem 1rem; color:#64748B; font-weight:600; border-bottom:1px solid rgba(255,255,255,.08);">Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#A5B4FC; font-weight:700; border-bottom:1px solid rgba(255,255,255,.05);">People</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Stakeholder alignment score</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">≥ 80%</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Ensures leadership buy-in before technology is introduced</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#A5B4FC; font-weight:700; border-bottom:1px solid rgba(255,255,255,.05);">People</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Adoption contract completion</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">100%</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">All champions and users commit to timelines and behaviors</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#7DD3FC; font-weight:700; border-bottom:1px solid rgba(255,255,255,.05);">Technology</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Time to first prototype</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">≤ 2 weeks</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Fast tangibility builds trust and accelerates feedback</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#7DD3FC; font-weight:700; border-bottom:1px solid rgba(255,255,255,.05);">Technology</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">User satisfaction (prototype)</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">≥ 4.0 / 5.0</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Validates the new workflow resonates with end users</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#6EE7B7; font-weight:700; border-bottom:1px solid rgba(255,255,255,.05);">Process</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0; border-bottom:1px solid rgba(255,255,255,.05);">Process adherence rate</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8; border-bottom:1px solid rgba(255,255,255,.05);">≥ 90%</td>
+              <td style="padding:.75rem 1rem; color:#64748B; border-bottom:1px solid rgba(255,255,255,.05);">Teams follow standardized runbooks and checklists</td>
+            </tr>
+            <tr>
+              <td style="padding:.75rem 1rem; color:#6EE7B7; font-weight:700;">Process</td>
+              <td style="padding:.75rem 1rem; color:#E2E8F0;">Continuous improvement cycle time</td>
+              <td style="padding:.75rem 1rem; color:#94A3B8;">≤ 30 days</td>
+              <td style="padding:.75rem 1rem; color:#64748B;">Regular iteration prevents stagnation and ensures scalability</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
