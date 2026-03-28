@@ -33,6 +33,11 @@ People → Technology → Process
 ```
 index.html                  # Single-page website (no build step required)
 presentation.html           # Brand & trademark slide deck (confidential, not linked from site)
+trademark-materials/        # Trademark submission documents (CONFIDENTIAL)
+  PTPCatalyst_Framework_Presentation.pptx        # PTPCatalyst™ framework overview deck
+  PTPOS_Vertical_Playbook_Presentation.pptx      # PTPOS™ vertical playbook deep-dive deck
+  PTPCatalyst_PTPOS_Trademark_Clearance_Report.docx  # USPTO clearance research report
+  PTPCatalyst_PTPOS_Framework_Description.docx   # Framework IP description & usage guidelines
 .github/workflows/
   deploy.yml                # GitHub Pages deployment workflow
 README.md
